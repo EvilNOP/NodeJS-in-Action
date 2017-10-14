@@ -1,0 +1,30 @@
+{
+  "name": "chatrooms",
+  "version": "1.0.0",
+  "description": "Minimalist multiroom chat server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvilNOP/NodeJS-in-Action.git"
+  },
+  "keywords": [
+    "socket.io",
+    "mime"
+  ],
+  "author": "EvilNOP",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EvilNOP/NodeJS-in-Action/issues"
+  },
+  "homepage": "https://github.com/EvilNOP/NodeJS-in-Action#readme",
+  "dependencies": {
+    "mime": "^2.0.3",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  }
+}
