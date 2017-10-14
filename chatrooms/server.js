@@ -2,8 +2,29 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const mime = require('mime');
+const chatServer = require('./lib/chatserver');
 
 const cache = {};
+
+const server = http.createServer((request, response) => {
+  let filePath;
+
+  if (request.url === '/') {
+    filePath = 'public/index.html';
+  } else {
+    filePath = `public${request.url}`;
+  }
+
+  const absPath = `./${filePath}`;
+
+  serveStatic(response, cache, absPath);
+});
+
+server.listen(3000, () => {
+  console.log('Sever listening on port 3000');
+});
+
+chatServer.listen(server);
 
 function send404(response) {
   response.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -37,21 +58,3 @@ function serveStatic(response, cache, absPath) {
     }));
   }
 }
-
-const server = http.createServer((request, response) => {
-  let filePath;
-
-  if (request.url === '/') {
-    filePath = 'public/index.html';
-  } else {
-    filePath = `public${request.url}`;
-  }
-
-  const absPath = `./${filePath}`;
-
-  serveStatic(response, cache, absPath);
-});
-
-server.listen(3000, () => {
-  console.log('Sever listening on port 3000');
-});
