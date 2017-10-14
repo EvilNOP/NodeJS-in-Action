@@ -24,3 +24,14 @@ exports.listen = function (server) {
     handleClientDisconnection(socket, nickNames, namesUsed);
   });
 };
+
+function assignGuestName(socket, guestNumber, nickNames, namesUsed) {
+  const name = `Guest${guestNumber}`;
+  
+  nickNames[socket.id] = name;
+  namesUsed.push(name);
+
+  socket.emit('nameResult', { success: true, name: name });
+
+  return guestNumber + 1;
+}
