@@ -71,3 +71,33 @@ function joinRoom(socket, room) {
     }
   });
 }
+
+function handleNameChangeAttempts(socket, nickNames, namesUsed) {
+  socket.on('nameAttempt', name => {
+    if (name.indexOf('Guest') == 0) {
+      socket.emit('nameResult', {
+        success: false,
+        message: 'Names cannot begin with "Guest".'
+      });
+    } else {
+      if (namesUsed.indexOf(name) == -1) {
+        const previousName = nickNames[socket.id];
+        const previousNameIndex = namesUsed.indexOf(previousName);
+
+        namesUsed.push(name);
+        nickNames[socket.id] = name;
+        delete namesUsed[previousNameIndex];
+
+        socket.emit('nameResult', {
+          success: true,
+          name: name
+        });
+      } else {
+        socket.emit('nameResult', {
+          success: false,
+          message: 'That name is already in use.'
+        });
+      }
+    }
+  });  
+}
