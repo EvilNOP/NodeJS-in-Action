@@ -109,3 +109,11 @@ function handleMessageBroadcasting(socket) {
     });
   });
 }
+
+function handleRoomJoining(socket) {
+  socket.on('join', room => {
+    socket.leave(currentRoom[socket.id]);
+
+    joinRoom(socket, room.newRoom);
+  });
+}
