@@ -105,7 +105,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 function handleMessageBroadcasting(socket) {
   socket.on('message', message => {
     socket.broadcast.to(message.room).emit('message', {
-      text: `${nickNames[socket.id]}: ${message.text}`;
+      text: `${nickNames[socket.id]}: ${message.text}`
     });
   });
 }
@@ -117,3 +117,4 @@ function handleRoomJoining(socket) {
     joinRoom(socket, room.newRoom);
   });
 }
+
