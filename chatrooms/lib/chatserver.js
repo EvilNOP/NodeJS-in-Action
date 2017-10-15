@@ -118,3 +118,11 @@ function handleRoomJoining(socket) {
   });
 }
 
+function handleClientDisconnection(socket, nickNames,  namesUsed) {
+  socket.on('disconnect', () => {
+    const nameIndex = namesUsed.indexOf(nickNames[socket.id]);
+
+    delete namesUsed[nameIndex];
+    delete nickNames[socket.id];
+  });
+}
