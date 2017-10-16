@@ -1,3 +1,61 @@
+const socket = io('http://localhost:3000');
+
+$(document).ready(() => {
+  const chatApp = new Chat(socket);
+
+  socket.on('nameResult', result => {
+    let message;
+
+    if (result.message) {
+      message = 'You are now known as ' + result.name + '.';
+    } else {
+      message = result.message;
+    }
+
+    $('#messages').append(divSystemContentElement(message));
+  });
+
+  socket.on('joinResult', result => {
+    $('#room').text(result.room);
+    $('#message').append(divSystemContentElement('Room changed.'));
+  });
+
+  socket.on('message', message => {
+    const newElement = $('<div></div>').text(message.text);
+
+    $('#message').append(newElement);
+  });
+
+  socket.on('rooms', rooms => {
+    $('#room-list').empty();
+
+    for (var room in rooms) {
+      room = room.substring(1, room.length);
+
+      if (room != '') {
+        $('#room-list').append(divEscapedContentElement(room));
+      }
+    }
+
+    $('#room-list div').click(() => {
+      chatApp.processCommand('/join ' + $(this).text());
+      $('#send-message').focus();
+    });
+  });
+
+  setInterval(() => {
+    socket.emit('rooms');
+  }, 1000);
+
+  $('#send-message').focus();
+
+  $('#send-form').submit(() => {
+    processUserInput(chatApp, socket);
+
+    return false;
+  });
+});
+
 function divEscapedContentElement(message) {
   return $('<div></div>').text(message);
 }
