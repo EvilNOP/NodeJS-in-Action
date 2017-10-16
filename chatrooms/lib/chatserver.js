@@ -17,7 +17,7 @@ exports.listen = function (server) {
     handleNameChangeAttempts(socket, nickNames, namesUsed);
     handleRoomJoining(socket);
 
-    socket.on('room', () => {
+    socket.on('rooms', () => {
       socket.emit('rooms', io.sockets.manager.rooms);
     });
 
@@ -51,7 +51,7 @@ function joinRoom(socket, room) {
     }
 
     if (clients.length > 1) {
-      let usersInRoomSummary = `Users currently in ${room}" `;
+      let usersInRoomSummary = `Users currently in ${room}: `;
   
       for (let index in clients) {
         const userSocketId = clients[index];
