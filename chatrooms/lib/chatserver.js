@@ -54,14 +54,16 @@ function joinRoom(socket, room) {
       let usersInRoomSummary = `Users currently in ${room}: `;
   
       for (let index in clients) {
-        const userSocketId = clients[index];
-  
-        if (userSocketId != socket.id) {
-          if (index > 0) {
-            usersInRoomSummary += ', ';
+        if (clients.hasOwnProperty(index)) {
+          const userSocketId = clients[index];
+          
+          if (userSocketId != socket.id) {
+            if (index > 0) {
+              usersInRoomSummary += ', ';
+            }
+    
+            usersInRoomSummary += nickNames[userSocketId];
           }
-  
-          usersInRoomSummary += nickNames[userSocketId];
         }
       }
   
