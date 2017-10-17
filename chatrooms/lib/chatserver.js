@@ -18,7 +18,7 @@ exports.listen = function (server) {
     handleRoomJoining(socket);
 
     socket.on('rooms', () => {
-      socket.emit('rooms', io.sockets.manager.rooms);
+      socket.emit('rooms', allRooms());
     });
 
     handleClientDisconnection(socket, nickNames, namesUsed);
@@ -126,3 +126,24 @@ function handleClientDisconnection(socket, nickNames,  namesUsed) {
     delete nickNames[socket.id];
   });
 }
+
+function allRooms() {
+  const socketIds = Object.keys(nickNames);
+  const rooms = io.sockets.adapter.rooms.shadowCopy();
+
+  socketIds.forEach(socketId => delete rooms[socketId]);
+
+  return Object.keys(rooms);
+}
+
+Object.prototype.shadowCopy = function () {
+  const obj = {};
+
+  for (let key in this) {
+    if (this.hasOwnProperty(key)) {
+      obj[key] = this[key];
+    }
+  }
+
+  return obj;
+};
