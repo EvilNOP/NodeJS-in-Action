@@ -6,7 +6,7 @@ $(document).ready(() => {
   socket.on('nameResult', result => {
     let message;
 
-    if (result.message) {
+    if (result.success) {
       message = 'You are now known as ' + result.name + '.';
     } else {
       message = result.message;
@@ -23,7 +23,7 @@ $(document).ready(() => {
   socket.on('message', message => {
     const newElement = $('<div></div>').text(message.text);
 
-    $('#message').append(newElement);
+    $('#messages').append(newElement);
   });
 
   socket.on('rooms', rooms => {
