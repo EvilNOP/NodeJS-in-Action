@@ -35,7 +35,7 @@ $(document).ready(() => {
       }
     }
 
-    $('#room-list div').click(() => {
+    $('#room-list div').click(function () {
       chatApp.processCommand('/join ' + $(this).text());
       $('#send-message').focus();
     });
