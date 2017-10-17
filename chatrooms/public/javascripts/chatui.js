@@ -29,11 +29,9 @@ $(document).ready(() => {
   socket.on('rooms', rooms => {
     $('#room-list').empty();
 
-    for (var room in rooms) {
-      room = room.substring(1, room.length);
-
-      if (room != '') {
-        $('#room-list').append(divEscapedContentElement(room));
+    for (let index in rooms) {
+      if (rooms.hasOwnProperty(index)) {
+        $('#room-list').append(divEscapedContentElement(rooms[index]));
       }
     }
 
