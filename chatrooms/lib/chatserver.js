@@ -114,15 +114,28 @@ function handleMessageBroadcasting(socket, nickNames) {
 
 function handleRoomJoining(socket) {
   socket.on('join', room => {
-    socket.leave(currentRoom[socket.id]);
+    // socket.leave(currentRoom[socket.id]);
+    handleRoomLeaving(socket);
 
     joinRoom(socket, room.newRoom);
+  });
+}
+
+function handleRoomLeaving(socket) {
+  const nickName = nickNames[socket.id];
+
+  socket.leave(currentRoom[socket.id]);
+
+  socket.broadcast.to(currentRoom[socket.id]).emit('message', {
+    text: `${nickName} has leaved room.`
   });
 }
 
 function handleClientDisconnection(socket, nickNames,  namesUsed) {
   socket.on('disconnect', () => {
     const nameIndex = namesUsed.indexOf(nickNames[socket.id]);
+    
+    handleRoomLeaving(socket);
 
     delete namesUsed[nameIndex];
     delete nickNames[socket.id];
