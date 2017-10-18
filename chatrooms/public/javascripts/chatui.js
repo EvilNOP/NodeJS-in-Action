@@ -73,7 +73,8 @@ function processUserInput(chatApp) {
       $('#messages').append(divSystemContentElement(systemMessage));
     }
   } else {
-    chatApp.sendMessage($('#room').text(), message); 
+    chatApp.sendMessage($('#room').text(), message);
+    
     $('#messages').append(divEscapedContentElement(message)); 
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));
   }
