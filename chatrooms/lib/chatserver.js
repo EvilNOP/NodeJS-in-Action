@@ -94,6 +94,10 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
           success: true,
           name: name
         });
+
+        socket.broadcast.to(currentRoom[socket.id]).emit('message', {
+          text: `${previousName} has changed nickname to ${name}.`
+        });
       } else {
         socket.emit('nameResult', {
           success: false,
