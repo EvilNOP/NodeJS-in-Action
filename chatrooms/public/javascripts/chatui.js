@@ -17,7 +17,7 @@ $(document).ready(() => {
 
   socket.on('joinResult', result => {
     $('#room').text(result.room);
-    $('#message').append(divSystemContentElement('Room changed.'));
+    $('#messages').append(divSystemContentElement('Room changed.'));
   });
 
   socket.on('message', message => {
