@@ -17,6 +17,11 @@ channel.on('join', (id, client) => {
 
   channel.on('broadcast', channel.subscriptions.id);
 
+  channel.on('shutdown', () => {
+    channel.emit('broadcast', '', "Chat has shutdown.\n");
+    channel.removeAllListeners('broadcast');
+  });
+
   channel.on('leave', id => {
     channel.removeListener('broadcast', channel.subscriptions[id]);
 
@@ -33,6 +38,10 @@ const server = net.createServer(client => {
 
   client.on('data', data => {
     data = data.replace('\r\n', '');
+
+    if (data == 'shutdown') {
+      channel.emit('shutdown');
+    }
 
     channel.emit('broadcast', id, data);
   });
