@@ -16,6 +16,12 @@ channel.on('join', (id, client) => {
   };
 
   channel.on('broadcast', channel.subscriptions.id);
+
+  channel.on('leave', id => {
+    channel.removeListener('broadcast', channel.subscriptions[id]);
+
+    channel.emit('broadcast', id, `${id} has left the chat.\n`);
+  });
 });
 
 const server = net.createServer(client => {
@@ -29,6 +35,10 @@ const server = net.createServer(client => {
     data = data.replace('\r\n', '');
 
     channel.emit('broadcast', id, data);
+  });
+
+  client.on('close', () => {
+    channel.emit('leave', id);
   });
 });
 
