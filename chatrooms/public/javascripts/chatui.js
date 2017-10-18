@@ -48,7 +48,7 @@ $(document).ready(() => {
   $('#send-message').focus();
 
   $('#send-form').submit(() => {
-    processUserInput(chatApp, socket);
+    processUserInput(chatApp);
 
     return false;
   });
@@ -62,7 +62,7 @@ function divSystemContentElement(message) {
   return $('<div></div>').html('<i>' + message + '</i>');
 }
 
-function processUserInput(chatApp, socket) {
+function processUserInput(chatApp) {
   const message = $('#send-message').val();
   let systemMessage;
 
