@@ -1,0 +1,25 @@
+{
+  "name": "downloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvilNOP/NodeJS-in-Action.git"
+  },
+  "keywords": [
+    "nimble"
+  ],
+  "author": "EvilNOP",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EvilNOP/NodeJS-in-Action/issues"
+  },
+  "homepage": "https://github.com/EvilNOP/NodeJS-in-Action#readme",
+  "dependencies": {
+    "nimble": "0.0.2"
+  }
+}
