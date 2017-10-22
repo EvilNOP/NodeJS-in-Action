@@ -1,0 +1,22 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvilNOP/NodeJS-in-Action.git"
+  },
+  "author": "EvilNOP",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EvilNOP/NodeJS-in-Action/issues"
+  },
+  "homepage": "https://github.com/EvilNOP/NodeJS-in-Action#readme",
+  "devDependencies": {
+    "eslint": "^4.9.0"
+  }
+}
