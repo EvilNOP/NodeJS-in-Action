@@ -18,5 +18,8 @@
   "homepage": "https://github.com/EvilNOP/NodeJS-in-Action#readme",
   "devDependencies": {
     "eslint": "^4.9.0"
+  },
+  "dependencies": {
+    "formidable": "^1.1.1"
   }
 }
